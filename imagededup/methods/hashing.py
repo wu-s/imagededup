@@ -345,6 +345,7 @@ class Hashing:
         encoding_map: Dict[str, str] = None,
         max_distance_threshold: int = 10,
         outfile: Optional[str] = None,
+        search_method: str = 'brute_force_cython' if not sys.platform == 'win32' else 'bktree',
     ) -> List:
         """
         Give out a list of image file names to remove based on the hamming distance threshold threshold. Does not
@@ -382,6 +383,7 @@ class Hashing:
             encoding_map=encoding_map,
             max_distance_threshold=max_distance_threshold,
             scores=False,
+            search_method=search_method,
         )
         files_to_remove = get_files_to_remove(result)
         if outfile:
